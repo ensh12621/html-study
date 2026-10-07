@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <h1 style="color:orange; font-style: italic; cursor:pointer;" id="txt" onClick="changeColor();">
+        로스트아크 재밌다 ~~~~~
+    </h1>
+
+<script>
+
+
+let changed = false;
+
+function changeColor(){
+    const obj = document.querySelector("#txt");
+    if(!changed){
+        
+        obj.style.fontStyle = "normal";
+        obj.style.color = "red";
+    }else{
+        obj.style.fontStyle = "italic";
+        obj.style.color = "orange";
+    }
+
+    changed = !changed;
+
+
+}
+
+
+
+
+</script>
+    
+</body>
+</html>
