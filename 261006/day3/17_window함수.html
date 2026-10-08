@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+    // alert, confirm 같은 함수들은 다 window 객체 안에 있는 함수
+    // window.alert(), window.confirm() 이렇게 썼어야 한다.
+    // 다만, window를 생략이 가능하다.
+    // 내장 함수라 표현
+
+    // 유용한 또 다른 내장함수
+    // setTimeout, setInterval
+
+    function fnTest(){
+        alert(`안녕?`);
+    }
+
+    // setTimeout(fnTest, 5000);
+
+    // setTimeout(function(){
+    //     alert("안녕?");
+    // }, 5000);
+
+    // setTimeout(() => {
+    //     alert("로스트아크 하고싶다");
+    // }, 5000);
+
+    // setInterval은 지정한 시간을 기준으로 주기적으로 반복 실행
+    const id = setInterval(function(){
+        alert(`로스트아크`);
+    }, 5000);
+
+</script>
+    
+</body>
+</html>

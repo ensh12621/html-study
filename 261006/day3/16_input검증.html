@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로스트아크 하고 싶다</title>
+</head>
+<body>
+    
+    <fieldset>
+        <legend>
+            회원가입
+            <!-- input 태그의 기본 타입은 text (생략 가능) -->
+        </legend>
+        <div>
+            <label>
+                아이디 :
+                <input type="text" id="user-id" autofocus placeholder="로스트아크 하고 싶다" />
+            </label>
+
+            
+            <input type="button" value="중복체크" />   
+        </div>
+
+        <div>
+            <label>
+                비밀번호:
+                <input type="password" id="pwd1" placeholder="비밀번호 입력" />
+            </label>
+        </div>
+        
+        <div>
+            <label>
+                비밀번호 확인:
+                <input type="password" id="pwd2" placeholder="비밀번호 확인" />
+            </label>
+        </div>
+
+        <div>
+            <label>
+                이메일:
+                <input type="email" id="email" />
+                <!-- 나중에 정규식으로 대체 -->
+            </label>
+        </div>
+        <div>
+            성별 - 
+            <label>
+                <input type="radio" name="gender" id="" value="m" />
+                남자
+            </label>
+            <label>
+                <input type="radio" name="gender" id="" value="f" />
+                여자
+            </label>
+        </div>
+        
+        <div>
+            자기소개: 
+            <div>
+                <textarea name="" id="intro" placeholder="로스트아크 하고 싶다. 레이드 돌고 싶다." cols="100" rows="10" style="resize:none;">
+
+                </textarea>
+            </div>
+        </div>
+
+        <div>
+            <!-- submit과 reset은 나중에 form 태그와 연계해서 사용 -->
+            <!-- input 버튼과 button 태그는 큰 차이 없음 -->
+            <button
+                onClick="fnJoin()"
+            >회원가입</button>
+        </div>
+
+    </fieldset>
+
+
+<script>
+
+
+    function fnJoin(){
+        // 가정: db로 회원정보를 보내기 전에 검증
+        // 아이디 => 6글자 이상
+        // 비밀번호 => 4글자 이상
+        // 이메일 => 빈 값 금지
+        // 비번1~2 같아야함
+
+        const userId = document.querySelector("#user-id").value;
+        const pwd1 = document.querySelector("#pwd1").value;
+        const pwd2 = document.querySelector("#pwd2").value;
+        const email = document.querySelector("#email").value;
+
+        // if(!(userId.length >= 6)){
+        //     alert("아이디는 6글자 이상이상 입력하세욤");
+        //     return;
+        // }
+        
+        // if(!(pwd1.length >= 4)){
+        //     alert("비밀번호는 4글자 이상 입력하세요");
+        //     return;
+        // }
+        
+        // if(pwd1 != pwd2){
+        //     alert("비밀번호가 서로 다릅니다.");
+        //     return;
+        // }
+        
+        // if(email.length < 1){
+        //     alert("이메일을 입력하셈");
+        //     return;
+        // }
+
+        const gender = document.querySelector("input[name='gender']:checked");
+        if(gender == null){
+            alert("성별을 선택하세요");
+            return;
+        }
+        
+        alert(gender.value);
+
+        alert("ㅊㅊ");
+    }   
+
+</script>
+
+</body>
+</html>
