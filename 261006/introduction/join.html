@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로스트아크 하고 싶다</title>
+</head>
+<body>
+    
+    <fieldset>
+        <legend>
+            회원가입
+            <!-- input 태그의 기본 타입은 text (생략 가능) -->
+        </legend>
+        <div>
+            <label>
+                아이디 :
+                <input type="text" autofocus placeholder="로스트아크 하고 싶다" />
+            </label>
+
+            
+            <input type="button" value="중복체크" />   
+        </div>
+
+        <div>
+            <label>
+                비밀번호:
+                <input type="password" placeholder="졸려죽겄네" />
+            </label>
+        </div>
+        <div>
+            <label>
+                이메일:
+                <input type="email" />
+                <!-- 나중에 정규식으로 대체 -->
+            </label>
+        </div>
+        <div>
+            성별 - 
+            <label>
+                <input type="radio" name="gender" id=""  checked />
+                남자
+            </label>
+            <label>
+                <input type="radio" name="gender" id="" />
+                여자
+            </label>
+        </div>
+        <div>
+            취미:
+            <label>
+                <input type="checkbox" name="" id="" checked/>
+                코딩
+            </label>
+            <label>
+                <input type="checkbox" name="" id="" checked/>
+                게임
+            </label>
+            <label>
+                <input type="checkbox" name="" id=""/>
+                독서
+            </label>
+            <label>
+                <input type="checkbox" name="" id=""/>
+                영화감상
+            </label>
+            <label>
+                <input type="checkbox" name="" id="" />
+                술먹기
+            </label>
+        </div>
+        <div>
+            프로필 이미지:
+            <input type="file" accept=".png" multiple />
+        </div>
+        <div>
+            나이대: 
+            <select name="" id="">
+                <option value="">:: 선택 ::</option>
+                <option value="">10대</option>
+                <option value="">20대</option>
+                <option value="">30대</option>
+                <option value="">40대</option>
+                <option value="">50대</option>
+                <option value="">60대 이상</option>
+            </select>
+        </div>
+        <div>
+            자기소개: 
+            <div>
+                <textarea name="" id="" placeholder="로스트아크 하고 싶다. 레이드 돌고 싶다." cols="100" rows="10" style="resize:none;">
+
+                </textarea>
+            </div>
+        </div>
+
+        <div>
+            <!-- submit과 reset은 나중에 form 태그와 연계해서 사용 -->
+            <!-- input 버튼과 button 태그는 큰 차이 없음 -->
+            <input type="submit"  />
+            <input type="button" value="회원가입" />
+            <button>회원가입</button>
+            <input type="reset" />
+        </div>
+
+    </fieldset>
+</body>
+</html>

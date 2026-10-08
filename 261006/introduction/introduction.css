@@ -1,0 +1,162 @@
+
+body{
+    background-color: #eee;
+}
+
+#container{
+    display:flex;
+    width:900px;
+    margin:0 auto;
+
+    
+}
+
+aside{
+    background-color: #4a6cf7;
+    
+    color:#fff;
+    text-align: center;
+    padding:30px;
+    box-sizing: border-box;
+    border-top-left-radius:5px;
+    border-bottom-left-radius:5px;
+}
+
+#namecard{
+    
+}
+
+
+
+#namecard img{
+    width:100px;
+    height:100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#intro .impact{
+    font-weight:bold; 
+    font-size:20px; 
+    color:yellowgreen
+}
+
+#intro .impact span{
+    color:rgb(190, 141, 33);
+}
+
+#sns a{
+    background-color:#fff;
+    color:#4a6cf7;
+    text-decoration: none;
+    border-radius: 30px;
+    padding:10px 20px;
+    border:0 none;
+}
+
+#detail{
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+#detail p{
+    margin:0;
+    padding:0;
+}
+
+#detail .mbti{
+    color:#ffde5e;
+}
+
+#main{
+    background-color: #fff;
+    flex-grow:1;
+    padding:30px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.subtitle{
+    border-left:6px solid #4a6cf7;
+    padding-left:5px;
+}
+
+mark{
+    background-color: #ffde5e;
+}
+
+
+#career .sub-list li:hover{ 
+    color:rgb(170, 47, 47);
+}
+
+#career .label1{
+    color:#3dc497;
+    display:block;
+    font-size:10pt;
+}
+
+#career .label2{
+    color:#66ce37;
+    display:block;
+    font-size:10pt;
+}
+
+#skills ul{
+    display:flex; 
+    gap: 10px;
+}
+
+#skills li{
+    list-style-type: none;
+}
+
+#skills .skill-icon{
+    width:50px;
+    height:50px;
+}
+
+
+#main table{
+    width:100%;
+}
+
+#main table th{
+    background-color: #4a6cf7;
+    color:#fff;
+}
+
+#main table,
+#main table *{
+    border-collapse: collapse;
+}
+
+
+#main table caption{
+    margin-bottom:5px;
+}
+
+#main table th,
+#main table td{
+    border:1px solid #eee;
+    text-align: center;
+    padding:5px 10px;
+    
+
+}
+
+
+
+
+#main table th:first-child{
+    border-top-left-radius: 5px;   
+}
+
+#main table th:last-child{
+    border-top-right-radius: 5px;   
+}
+
+
+
+
