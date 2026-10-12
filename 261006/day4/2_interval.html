@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        #container{
+            width:500px;
+            margin:20px auto;
+        }
+
+        #time{
+            text-align: center;
+            font-weight: bold;
+            color: blue;
+            font-size: 30px;
+
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <div id="time">
+
+        </div>
+
+    </div>
+
+<script>
+
+    const timeTag = document.querySelector("#time");
+    // timeTag.innerHTML = dateTime.toLocaleTimeString();
+
+    setInterval(() => {
+        const dateTime = new Date();
+        let time = addZeroPad(dateTime.getHours()) + ":" + addZeroPad(dateTime.getMinutes()) + ":" + addZeroPad(dateTime.getSeconds());
+        timeTag.innerHTML = time;
+    }, 1000)
+    
+    function addZeroPad(time){
+        if(time < 10){
+            time = '0' + time;
+        }
+        return time;
+    }
+
+</script>
+
+</body>
+</html>

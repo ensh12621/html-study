@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            display: grid;
+            grid-template-columns : repeat(3, 1fr);
+            /* grid-template-rows: 100px 200px; */
+            grid-template-rows: repeat(4,  100px);
+
+        }
+
+
+        .blue-box{
+            background-color: blue;
+            grid-column: 1/-1; /* 1/-1 => -1은 뒤에서 부터, // = (1,4)*/
+        }
+
+        .orange-box{
+            background-color: orange;
+            grid-row:2/4;
+        }
+
+        .yellow-box{
+            background-color: yellow;
+            grid-column:2/4;
+        }
+        
+        .green-box{
+            background-color: green;
+        }
+
+        .yellow-green-box{
+            background-color: yellowgreen;
+        }
+
+        .box {
+            border: 2px solid black;
+            text-align: center;
+            padding: 10px;
+            font-size: 15px;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+
+        <div class="box blue-box">
+            box1
+        </div>
+        <div class="box orange-box">
+            box2
+        </div>
+        <div class="box yellow-box">
+            box3
+        </div>
+        <div class="box green-box">
+            box4
+        </div>
+        <div class="box yellow-green-box">
+            box5
+        </div>
+        <div class="box">
+            box6
+        </div>
+    </div>
+
+
+</body>
+
+</html>

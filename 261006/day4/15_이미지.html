@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        ul {
+            border-bottom: 1px solid #ccc;
+            padding-bottom:30px;
+            list-style-type: none;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <ul>
+        <li>
+            <label>
+                <input type="radio" name="subject" value="java" onchange="fnTest()" />
+                JAVA
+            </label>
+        </li>
+
+        <li>
+            <label>
+                <input type="radio" name="subject" value="oracle" onchange="fnTest()" />
+                오라클
+            </label>
+        </li>
+        <li>
+            <label>
+                <input type="radio" name="subject" value="html" onchange="fnTest()" />
+                HTML
+            </label>
+        </li>
+        <li>
+            <label>
+                <input type="radio" name="subject" value="jquery" onchange="fnTest()" />
+                jQuery
+            </label>
+        </li>
+
+    </ul>
+
+    <img id="img" src="" alt="이미지" />
+
+    <script>
+
+
+        function fnTest() {
+            const subject = document.querySelector("input[name='subject']:checked").value;
+            const imgSrc = "../images/book_" + subject + ".jpg";
+            console.log(imgSrc);
+            document.querySelector("#img").src= imgSrc
+        }
+
+
+    </script>
+
+</body>
+
+</html>

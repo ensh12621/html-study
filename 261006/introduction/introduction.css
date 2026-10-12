@@ -3,6 +3,37 @@ body{
     background-color: #eee;
 }
 
+
+body {
+  background:black url(back-space.jpg);
+  animation: stars 205s linear alternate;
+}
+
+@keyframes stars {
+  0% { background-position:0 0 }
+  100% { background-position:0 100% }
+}
+
+/* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+
 #container{
     display:flex;
     width:900px;

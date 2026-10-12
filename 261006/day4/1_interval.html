@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="result""></div>
+
+<script>
+    let i = 0;
+    const result = document.querySelector("#result")
+
+    const text = "HELLO HTML";
+
+    const intervalId = setInterval(function(){
+        const html = result.innerHTML
+        result.innerHTML += text.charAt(i);
+        i++;
+
+        if(i > text.length){
+            clearInterval(intervalId);
+
+            // result.innerHTML = "";
+            // i = 0;
+
+        }
+    }, 500);
+
+
+</script>
+    
+</body>
+</html>

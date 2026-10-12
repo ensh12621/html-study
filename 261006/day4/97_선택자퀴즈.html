@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        .section1{
+            display:flex;
+            width:50%;
+            margin:20px auto;
+            gap:20px;
+            justify-content: center;
+            border-bottom:2px solid black;
+        }
+
+        .section1 .btn-group{
+            display:flex;
+            align-items:center;
+        }
+
+        #image-list{
+            width:50%;
+            margin:20px auto;
+        }
+
+        ul {
+            list-style-type: none;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="section1">
+        <ul>
+            <li>
+                <label>
+                    <input radio type="checkbox" name="subject" value="java" />
+                    JAVA
+                </label>
+            </li>
+
+            <li>
+                <label>
+                    <input radio type="checkbox" name="subject" value="oracle" />
+                    오라클
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input radio type="checkbox" name="subject" value="html" />
+                    HTML
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input radio type="checkbox" name="subject" value="jquery" />
+                    jQuery
+                </label>
+            </li>
+
+            
+        </ul>
+        <div class="btn-group">
+            <button onclick="loadImages()">클릭</button>
+        </div>
+        
+    </div>
+
+    <div id="image-list"></div>
+
+
+    <script>
+
+        function loadImages(){
+            const subjectTags = document.querySelectorAll(`input[name="subject"]:checked`);
+            const imageHolder = document.querySelector("#image-list");
+            imageHolder.innerHTML = "";
+            subjectTags.forEach(item => {
+                const newImageTag = `<img src="../images/book_${item.value}.jpg" alt="이미지1" />`;
+                console.log(newImageTag);
+                imageHolder.innerHTML += newImageTag;
+                console.log(item.value);
+            });
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>

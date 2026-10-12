@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>과목 목록</h1>
+    <h3 id="js">자바스크립트</h3>
+
+    <hr />
+    <div id="list">
+        <p id="java">
+            자바
+        </p>
+
+        <p id="oracle" style="color:blue;">
+            오라클
+        </p>
+
+        <p id="html">
+            HTML
+        </p>
+    </div>
+
+    <hr />
+
+    <!-- 자식요소 맨 뒤에 추가(이어 붙이기) -->
+    <button onclick="fnAppend()">appendChild</button>
+    <!-- 선택한 노드 이전에 넣기  -->
+    <button onclick="fnBefore()">insertBefore</button>
+    <!-- 새로운 태그 만들기 -->
+    <button onclick="fnCreateElement()">createElement</button>
+    <!-- 새로운 속성 만들기 -->
+    <button onclick="fnCreateAttribute()">createAttribute</button>
+    <!-- 노드 제거 -->
+    <button onclick="fnRemoveNode()">removeChild</button>
+    <!-- 속성 제거 -->
+    <button onclick="fnRemoveAttr()">removeAttr</button>
+    <!-- 노드 복사 -->
+     <button onclick="fnClone()">cloneNode</button>
+
+    <script>
+
+        function fnAppend() {
+            const listTag = document.querySelector("#list");
+            const jsTag = document.querySelector("#js");
+            listTag.appendChild(jsTag);
+        }
+
+        function fnBefore() {
+            const listTag = document.querySelector("#list");
+            const jsTag = document.querySelector("#js");
+            const oracleTag = document.querySelector("#oracle");
+            listTag.insertBefore(jsTag, oracleTag);
+        }
+
+
+        function fnCreateElement() {
+            const listTag = document.querySelector("#list");
+            // const jsTag = document.querySelector("#js");
+            let react = document.createElement("p");
+            react.innerHTML = "React.js";
+            listTag.appendChild(react);
+        }
+
+        function fnCreateAttribute() {
+            const listTag = document.querySelector("#list");
+            // const jsTag = document.querySelector("#js");
+            let react = document.createElement("p");
+            react.innerHTML = "React.js";
+
+            const style = document.createAttribute("style");
+            style.value = "color:red; font-weight:bold;";
+            react.setAttributeNode(style);
+
+            listTag.appendChild(react);
+        }
+
+        function fnRemoveNode(){
+            const listTag = document.querySelector("#list");
+            const oracleTag = document.querySelector("#oracle");
+            if(oracleTag)
+                listTag.removeChild(oracleTag);
+        }
+
+        function fnRemoveAttr(){
+            const listTag = document.querySelector("#list");
+            const oracleTag = document.querySelector("#oracle");
+            oracleTag.removeAttribute("style");
+
+        }
+
+        function fnClone(){
+            const listTag = document.querySelector("#list");
+            const jsTag = document.querySelector("#js");
+            listTag.appendChild(jsTag.cloneNode(true));
+        }
+
+
+    </script>
+
+
+
+</body>
+
+</html>

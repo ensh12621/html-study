@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+        취미: 
+        <label>
+            <input type="checkbox" name="subject" value="java" />
+            자바 공부
+        </label>
+        
+        <label>
+            <input type="checkbox" name="subject" value="oracle" />
+            오라클 공부
+        </label>
+        <label>
+            <input type="checkbox" name="subject" value="html" />
+            HTML 공부
+        </label>
+        <label>
+            <input type="checkbox" name="subject" value="javascript" />
+            자바스크립트 공부
+        </label>
+    </div>
+    <div>
+        <button onclick="fnTest()">선택</button>
+    </div>
+
+<script>
+
+function fnTest(){
+    const list = document.querySelectorAll(`input[name="subject"]:checked`); 
+    for(let i=0; i<list.length; i++){
+        console.log(list[i].value);
+    }
+}
+
+</script>
+    
+</body>
+</html>
