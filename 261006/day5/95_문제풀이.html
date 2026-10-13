@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        table,tr,td,th{
+            border:1px solid black;
+            border-collapse: collapse;
+            padding:5px 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="contents">
+
+    </div>
+
+
+    <script>
+
+
+        $.ajax({
+            url: "https://jsonplaceholder.typicode.com/users",
+            dataType: "json", // 응답받은 데이터의 타입
+            type: "GET", // 요청(호출) 방식. 대표적으로 GET,POST,PUT,DELETE가 있음
+            data: {}, // 서버로 보낼 값
+            success: function (data) {
+                // 서버 호출이 성공적으로 끝났을 때 실행되는 함수
+                //console.log(data);
+
+                const table = document.createElement("table");
+
+                // thead
+                const thead = document.createElement("thead");
+                table.appendChild(thead);
+
+                const tr = document.createElement("tr");
+                thead.appendChild(tr);
+
+                const th1 = document.createElement("th");
+                th1.innerHTML = "아이디";
+                tr.appendChild(th1);
+
+                const th2 = document.createElement("th");
+                th2.innerHTML = "이름";
+                tr.appendChild(th2);
+
+                const th3 = document.createElement("th");
+                th3.innerHTML = "이메일";
+                tr.appendChild(th3);
+
+                const th4 = document.createElement("th");
+                th4.innerHTML = "웹사이트";
+                tr.appendChild(th4);
+
+                const tbody = document.createElement("tbody");
+                table.appendChild(tbody);
+
+                // 데이터 렌더링
+                data.forEach( user => {
+                    const trUser = document.createElement("tr");
+
+                    const td1 = document.createElement("td");
+                    td1.innerHTML = user.id;
+                    trUser.appendChild(td1);
+
+                    const td2 = document.createElement("td");
+                    td2.innerHTML = user.name;
+                    trUser.appendChild(td2);
+
+                    const td3 = document.createElement("td");
+                    td3.innerHTML = user.email;
+                    trUser.appendChild(td3);
+
+                    const td4 = document.createElement("td");
+                    td4.innerHTML = user.website;
+                    trUser.appendChild(td4);
+
+                    tbody.appendChild(trUser);
+                });
+
+
+                document.querySelector("#contents").appendChild(table);
+            }
+        });
+
+
+
+    </script>
+
+</body>
+
+</html>

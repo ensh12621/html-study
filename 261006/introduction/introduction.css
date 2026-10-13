@@ -190,4 +190,18 @@ mark{
 
 
 
+.left-popup{
+    position:fixed;
+    left:0;
+    bottom:0px;
+    background-color: rgba(3,3,3, 0.5);
+    color:#fff;
+    padding:30px;
+    width:400px;
+    height:300px;
+    border-radius: 5px;
+}
 
+.left-popup > article{
+    display:none;
+}

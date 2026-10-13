@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style></style>
+</head>
+<body>
+
+    <img id="image" src="../images/superblacksoftcow1.png" alt="이미지" />
+
+    
+<script>
+
+    const img = document.querySelector("#image");
+    img.addEventListener("mouseover", () => {
+        img.src = "../images/superblacksoftcow2.png";
+    });
+    img.addEventListener("mouseout", () => {
+        img.src = "../images/superblacksoftcow1.png";
+    });
+
+    // 이벤트 종류
+    // click => 마우스 클릭했을 때
+    // dbclock => 더블 클릭했을 때
+    // mousedown => 마우스를 누르고 있을때
+    // mouseup => 마우스를 떼었을 때
+    // mousemove => 마우스를 움직일 떄
+
+
+
+</script>
+
+</body>
+</html>

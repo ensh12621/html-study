@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <style>
+        
+        .dark-mode{
+            background-color: #333;
+            color:#fff;
+        }
+
+        .light-mode{
+            background-color: #fff;
+            color:#000;
+        }
+
+        .light-mode #light{
+            display:none;
+        }
+
+        .dark-mode #dark{
+            display:none;
+        }
+
+        #light, #dark{
+            cursor:pointer;
+        }
+
+
+    </style>
+
+</head>
+
+<body class="light-mode" >
+
+    <div>
+        <span id="light" class="material-symbols-outlined" onclick="fnMode()">
+            light_mode
+        </span>
+
+        <span id="dark" class="material-symbols-outlined"  onclick="fnMode()">
+            dark_mode
+        </span>
+    </div>
+
+    <div>
+        <ul>
+            <li>자바</li>
+            <li>오라클</li>
+            <li>HTML</li>
+        </ul>
+    </div>
+
+    <script>
+
+        function fnMode(){
+            const body = document.body;
+            body.classList.toggle("light-mode"); 
+            body.classList.toggle("dark-mode"); 
+        }
+
+
+
+
+    </script>
+
+</body>
+
+</html>
