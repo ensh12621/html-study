@@ -174,6 +174,11 @@ mark {
     width: 50px;
     height: 50px;
     cursor: pointer;
+    transition:transform 0.5s ease;
+}
+
+#skills .skill-icon:hover{
+    transform:scale(1.2);
 }
 
 
