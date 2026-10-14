@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        table,
+        tr,
+        td,
+        th {
+            border: 1px solid black;
+            padding: 10px;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- html. 반드시 id가 app인 태그 안에서 작업 -->
+        <!-- (script 맨 하단 app.mount('#app'); 여기 아이디와 같아야 함) -->
+
+        <div v-if="page == 'list'">
+            <h1>게시글 목록</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>타이틀</th>
+                        <th>작성자</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in list">
+                        <td>{{item.boardNo}}</td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.nickname}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <button @click="page='write'">게시글등록</button>
+            </div>
+        </div><!-- list -->
+
+        <div v-if="page == 'write'">
+            <h1>게시글 등록</h1>
+            <div>
+                <div>
+                    <label>
+                        제목:
+                        <input type="text" v-model="title">
+                    </label>
+                </div>
+
+                <div>
+                    <label>
+                        내용:
+                        <input type="text" v-model="contents">
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        닉네임:
+                        <input type="text" v-model="nickname">
+                    </label>
+                </div>
+
+
+
+            </div>
+
+            <button @click="saveNewArticle">등록!</button>
+            <button @click="page='list'">되돌아가기</button>
+        </div>
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                // 변수 - (key : value)
+                page: "list",
+                title: "",
+                contents: "",
+                nickname: "",
+                list: [
+                    {
+                        boardNo: 1,
+                        title: "첫 번째 게시글",
+                        contents: "1빠~~~",
+                        nickname: "길동이"
+                    },
+
+                    {
+                        boardNo: 2,
+                        title: "로스트아크 하고싶다",
+                        contents: "오늘 리셋되는 날이네",
+                        nickname: "로아유저"
+                    }
+                ]
+            };
+        },
+        methods: {
+            // 함수(메소드) - (key : function())
+            saveNewArticle: function () {
+                const self = this;
+
+                //const newSequence = Number(self.list[self.list.length -1].boardNo) + 1;
+                const newSequence = Number(self.list[0].boardNo) + 1;
+
+                self.list.push({
+                    boardNo: newSequence,
+                    title: self.title,
+                    contents: self.contents,
+                    nickname: self.nickname
+                });
+
+                self.list.sort((a, b) => {
+                    return a.boardNo < b.boardNo ? 1 : -1;
+                })
+
+                self.page = "list";
+
+            }
+        }, // methods
+        mounted() {
+            // 처음 시작할 때 실행되는 부분
+            const self = this;
+            self.list.sort((a, b) => {
+                return a.boardNo < b.boardNo ? 1 : -1;
+            })
+        }
+    });
+
+    app.mount('#app');
+</script>

@@ -21,7 +21,18 @@
             <label>
                 <input type="radio" name="board" v-model="kind"  value="C" /> 문의게시판
             </label>
+         </div>
 
+         <hr/>
+
+         <div v-if="kind == 'A'">
+            공지사항 출력
+         </div>
+         <div v-else-if="kind == 'B'">
+            자유게시판 출력
+         </div>
+         <div v-else>
+            문의게시판 출력
          </div>
     </div>
 </body>

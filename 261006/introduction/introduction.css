@@ -6,6 +6,7 @@ body {
 body {
     background: black url(back-space.jpg);
     animation: stars 205s linear alternate;
+    animation-iteration-count: infinite;
 }
 
 @keyframes stars {
