@@ -138,11 +138,11 @@
                 <li style="list-style: none;">
                     <ul>
                         <li>
-                            <img class="skill-icon" src="kafka.png" alt="스킬셋 이미지" />
+                            <img class="skill-icon2" src="kafka.png" alt="스킬셋 이미지" />
                         </li>
 
                         <li>
-                            <img class="skill-icon" src="kuberentes.png" alt="스킬셋 이미지" />
+                            <img class="skill-icon2" src="kuberentes.png" alt="스킬셋 이미지" />
                         </li>
 
                     </ul>
@@ -338,12 +338,39 @@
                 });
                 // console.log(this.dataset.skill);
                 const article = document.querySelector(`.left-popup article[data-skill="${this.dataset.skill}"]`);
-                if(article){
+                if (article) {
                     article.style.display = "block";
                 }
-                
+
             });
         });
+
+        let i = 0;
+        let j = 0;
+        setInterval(() => {
+
+            skillIcons.forEach(icon => {
+                icon.style.transform = "";
+            });
+
+            skillIcons[i].style.transform = "scale(1.2)";
+
+            j = i - 1;
+            if (j < 0) {
+                j = 0;
+            }
+
+            // console.log(i, j);
+            
+            i++;
+
+            if (i == skillIcons.length) {
+                j = 0;
+                i = 0;
+
+            }
+
+        }, 500);
 
     </script>
 
