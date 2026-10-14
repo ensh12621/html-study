@@ -30,21 +30,30 @@
             <table>
                 <thead>
                     <tr>
+                        <th>선택</th>
                         <th>No</th>
                         <th>타이틀</th>
                         <th>작성자</th>
+                        <th>삭제</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="item in list">
+                        <td>
+                            <input type="radio" name="board" :value="item.boardNo" v-model="selectedToUpdate">
+                        </td>
                         <td>{{item.boardNo}}</td>
                         <td>{{item.title}}</td>
                         <td>{{item.nickname}}</td>
+                        <td>
+                            <button @click="removeArticle(item.boardNo)">삭제</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-            <div>
+            <div style="margin-top:10px; display:flex; gap:5px;">
                 <button @click="page='write'">게시글등록</button>
+                <button @click="goToUpdatePage()">수정</button>
             </div>
         </div><!-- list -->
 
@@ -79,6 +88,38 @@
             <button @click="page='list'">되돌아가기</button>
         </div>
 
+
+        <div v-if="page == 'update'">
+            <h1>게시글 수정</h1>
+            <div>
+                <div>
+                    <label>
+                        제목:
+                        <input type="text" v-model="uTitle">
+                    </label>
+                </div>
+
+                <div>
+                    <label>
+                        내용:
+                        <input type="text" v-model="uContents">
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        닉네임:
+                        <input type="text"  v-model="uNickname">
+                    </label>
+                </div>
+
+
+
+            </div>
+
+            <button @click="updateArticle">수정</button>
+            <button @click="page='list'">되돌아가기</button>
+        </div>
+
     </div>
 </body>
 
@@ -93,6 +134,10 @@
                 title: "",
                 contents: "",
                 nickname: "",
+                uBoardNo: "",
+                uTitle: "",
+                uContents: "",
+                uNickname: "",
                 list: [
                     {
                         boardNo: 1,
@@ -107,7 +152,9 @@
                         contents: "오늘 리셋되는 날이네",
                         nickname: "로아유저"
                     }
-                ]
+                ],
+                selectedToUpdate: "",
+                selectedItem:{}
             };
         },
         methods: {
@@ -129,8 +176,83 @@
                     return a.boardNo < b.boardNo ? 1 : -1;
                 })
 
+                self.title = "";
+                self.contents = "";
+                self.nickname = "";
+
                 self.page = "list";
 
+            },
+
+            goToUpdatePage: function(){
+                const self = this;
+
+
+                if(self.selectedToUpdate == ""){
+                    alert("수정할 게시글을 선택해주세요.");
+                    return;
+                }
+
+                for(let i=0; i<self.list.length; i++){
+                    if(self.list[i].boardNo == self.selectedToUpdate){
+                        self.selectedItem = self.list[i];
+                    }
+                }
+
+                self.uTitle = self.selectedItem.title;
+                self.uContents = self.selectedItem.contents;
+                self.uNickname = self.selectedItem.nickname;
+                self.uBoardNo = self.selectedItem.boardNo;
+
+                self.page = "update";
+            },
+
+            removeArticle: function (boardNo) {
+
+                if (!confirm("정말로 삭제하시겠습니까?")) {
+                    return;
+                }
+
+                const self = this;
+                for (let i = 0; i < self.list.length; i++) {
+                    if (Number(self.list[i].boardNo) == Number(boardNo)) {
+                        self.list.splice(i, 1);
+                        break;
+                    }
+                }
+            },
+
+            updateArticle: function(){
+                const self = this;
+
+
+                console.log(self.selectedToUpdate);
+
+                for(let i=0; i<self.list.length; i++){
+                    if(self.list[i].boardNo == self.selectedToUpdate){
+                        self.list[i] = {
+                            boardNo: self.uBoardNo,
+                            title: self.uTitle,
+                            contents: self.uContents,
+                            nickname: self.uNickname
+                        };
+                        break;
+                    }
+                }
+
+                self.selectedToUpdate = "";
+
+                self.selectedItem = "";
+                self.title = "";
+                self.contents = "";
+                self.nickname = "";
+                
+                self.uBoardNo = "";
+                self.uTitle = "";
+                self.uContents = "";
+                self.uNickname = "";
+
+                 self.page = "list";
             }
         }, // methods
         mounted() {
