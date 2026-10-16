@@ -1,0 +1,255 @@
+body {
+    background-color: azure;
+}
+
+ul,
+ol {
+    list-style-type: none;
+    padding: 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-areas:
+        "header header"
+        "aside content"
+}
+
+.header {
+    /* background-color: orange;  */
+    grid-area: header;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;;
+    background-color: #e1f9fd;
+    border-radius: 5px;
+    margin: 0px 10px 10px 10px;
+    width: 98.5%;
+}
+
+.header h1 {
+    display: none;
+}
+
+.header .field {
+    position: relative;
+    height: 30px;
+}
+
+.header .field input {
+    width: 500px;
+    height: 100%;
+    border: 0 none;
+    box-shadow: 2px 2px 2px #ccc;
+    outline: none;
+    padding: 2.5px 60px 2.5px 20px;
+}
+
+.header .field .search-btn {
+    color: #fff;
+    background-color: rgb(68, 136, 136);
+    border: 0 none;
+    border-radius: 5px;
+    position: absolute;
+    right: 8px;
+    top: 3px;
+    height: 100%;
+}
+
+.header .right{
+    display:flex;
+    gap:10px;
+}
+
+.header .right a{
+    color:#000;
+    text-decoration: none;
+    cursor:pointer;
+}
+
+.logo {
+    color: greenyellow;
+    font-size: 52px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+.aside {
+    background-color: #fff;
+    grid-area: aside;
+    margin-left: 10px;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.aside h1 {
+    font-size: 16px;
+}
+
+
+.aside .category a {
+    text-decoration: none;
+    ;
+    color: #ccc;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.aside .category {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.aside .category li {
+    border-radius: 5px;
+    padding: 3px 10px;
+}
+
+.aside .category li.clicked {
+    background-color: rgb(48, 155, 155);
+}
+
+.aside .category li.clicked a {
+    color: #fff;
+}
+
+.aside .price-range {
+    display: flex;
+    flex-direction: column;
+    color: #aaa;
+    padding-left: 10px;
+
+}
+
+.aside .price-range label {
+    cursor: pointer;
+}
+
+.content {
+    grid-area: content;
+}
+
+.content h1 {
+    display: none;
+}
+
+
+.content .card-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    grid-auto-rows:  minmax(300px, auto);;
+    gap: 10px;
+    box-shadow: none;
+    padding: 20px;
+}
+
+.content .card-list li a {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+
+    border-radius: 5px;
+    text-decoration: none;
+    color: #000;
+    overflow:hidden;
+}
+
+.content .card-list li a img{
+    height:300px;
+    object-fit: contain;
+}
+
+
+.content .card-list .red {
+    color: red;
+    font-weight: bold;
+}
+
+.footer{
+    height:300px;
+    background-color: aquamarine;
+    color:#fff;
+    padding:5px 20px;
+}
+
+.footer h1{
+    margin:0;
+}
+
+
+@media (min-width: 801px) {
+    .header .logo {
+        font-size: 22px;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .aside {
+        display: none;
+    }
+
+    .header {
+        padding-bottom: 100px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+
+    .header>span {
+        display: none;
+    }
+
+    .header .field input {
+        padding: 10px 0;
+    }
+
+    .header .search-btn {
+        transform: scale(1.3) translateY(5px);
+    }
+
+    .content .card-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 300px;
+    }
+
+    .content .card-list li a {
+        width: 300px;
+    }
+
+    .header .field input {
+        width: 400px;
+    }
+
+}
+
+@media (max-width: 600px) {
+    .content{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .content .card-list{
+        display:flex;
+        flex-direction: column;
+        flex-wrap: wrap;;
+        align-items: center;
+    }
+
+}

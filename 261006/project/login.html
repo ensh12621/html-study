@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        body {
+            background-color: azure;
+        }
+
+        .div1 {
+            width: 300px;
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow:2px 2px 2px rgba(0, 0, 0, 0.2);
+            transform:translateY(50%);
+            
+        }
+
+        .div1 h1 {
+            display: none;
+        }
+
+
+        .div1_1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .div1_1 span{
+            font-weight: bold;
+            font-size:24px;
+        }
+
+        .div1_1 p{
+            color:#aaa;
+        }
+
+        .div1_2{
+            display:flex;
+            flex-direction: column;
+            gap:10px;
+            margin-bottom:2%;
+        }
+
+        input{
+            outline:none;
+            border-radius: 5px;
+        }
+
+
+        .div1_2 label{
+            font-weight: bold;;
+        }
+
+        .div1_2 input{
+            border:1px solid #ccc;
+            padding:10px;
+        }
+
+        .div1_3{
+            display:flex;
+            flex-direction: column;
+            margin-top:20px;
+        }
+
+        .div1_3 button{
+            color:#fff;
+            background-color: rgba(43, 82, 190, 0.815);
+            border:0 none;
+            padding:10px 0;
+            border-radius: 5px;
+        }
+
+        ul{
+            list-style-type: none;
+            padding:0;
+        
+        }
+
+
+        .div1_4 ul{
+            display:flex;
+            justify-content: center;
+            gap:10px;
+        }
+
+        .div1_4 li,
+        .div1_4 a{
+            color:#ccc;
+        }
+
+        .div1_4 a{
+            text-decoration: none;
+            font-size:12px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- html. 반드시 id가 app인 태그 안에서 작업 -->
+        <!-- (script 맨 하단 app.mount('#app'); 여기 아이디와 같아야 함) -->
+
+        <div class="div1">
+            <div class="div1_1">
+                <h1>로그인</h1>
+                <span>환영합니다</span>
+                <p>서비스 이용을 위해 로그인해주세요</p>
+
+
+            </div>
+
+            <div class="div1_2">
+                <label for="user-id">아이디</label>
+                <input id="user-id" type="text" v-model="userId" placeholder="아이디를 입력해주세요" @keyup.enter="login">
+                
+            </div>
+
+            <div class="div1_2">
+                <label for="user-pwd">비밀번호</label>
+                <input id="user-pwd"" type="password" v-model="userPwd" placeholder="비밀번호를 입력해주세요" @keyup.enter="login">
+            </div>
+
+            <div class="div1_3">
+                <button @click="login">
+                    로그인
+                </button>
+            </div>
+
+            <div class="div1_4">
+                <ul>
+                    <li>
+                        <a href="#">
+                            비밀번호 찾기
+                        </a>
+                    </li>
+
+                    <li>
+                        |
+                    </li>
+
+                    <li>
+                        <a href="join.html">
+                            회원가입
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                // 변수 - (key : value)
+                userId:"",
+                userPwd:""
+            };
+        },
+        methods: {
+            // 함수(메소드) - (key : function())
+            login: function () {
+                const self = this;
+
+                if(self.userId == "" || self.userPwd == ""){
+                    alert("아이디와 비밀번호를 모두 입력해주세요");
+                    return;
+                }
+
+                $.ajax({
+                    url: "http://192.168.30.57:3000/user/login",
+                    dataType: "json",
+                    type: "GET", // 원래대로라면 post
+                    data: {
+                        userId: self.userId,
+                        pwd:self.userPwd
+                    },
+                    success: function (data) {
+                        console.log(data);
+
+                        if(data.message == "fail"){
+                            alert("아이디 혹은 비밀번호가 다릅니다.");
+
+                        }else{
+                            // 로그인 성공
+                            alert(data.info.userName + "님 환영합니다");
+                            localStorage.setItem("sessionId", data.info.userId);
+                            localStorage.setItem("sessionName", data.info.userName);
+
+                            location.href = "product-home.html";
+                        }
+                    }
+                });
+            }
+        }, // methods
+        mounted() {
+            // 처음 시작할 때 실행되는 부분
+            const self = this;
+        }
+    });
+
+    app.mount('#app');
+</script>

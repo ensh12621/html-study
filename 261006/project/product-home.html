@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./product-home.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <div class="grid">
+            <div class="header">
+                <h1>헤더</h1>
+                <a href="#" class="logo">
+                    더좋은쇼핑몰
+                </a>
+                <div class="field">
+                    <input type="text">
+                    <button class="search-btn">검색</button>
+                </div>
+
+                <div class="right">
+                    <a href="mypage.html">
+                        <span>
+                            {{sessionName}}
+                        </span>
+                    </a>
+                    <a @click="fnLogout">로그아웃</a>
+                </div>
+
+            </div><!-- header -->
+
+            <div class="aside">
+                <h1>카테고리</h1>
+                <ul class="category">
+                    <li class="clicked">
+                        <a href="#">전체상품</a>
+                    </li>
+
+                    <li>
+                        <a href="#">스마트폰</a>
+                    </li>
+                    <li>
+                        <a href="#">게임기</a>
+                    </li>
+                    <li>
+                        <a href="#">노트북</a>
+                    </li>
+                    <li>
+                        <a href="#">기타</a>
+                    </li>
+                </ul>
+
+                <h1>가격대</h1>
+                <ul class="price-range">
+                    <li>
+                        <label>
+                            <input type="checkbox" name="" id="">
+                            1만원 이하
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="" id="">
+                            1만원 ~ 3만원
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="" id="">
+                            3만원 ~ 5만원
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="" id="">
+                            5만원 이상
+                        </label>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="content">
+                <h1>메인 영역</h1>
+                <ul class="card-list">
+
+                    <li v-for="item in list">
+                        <a @click="fnView(item.PRODUCT_ID)">
+                            <img :src="item.PATH" alt="썸네일 이미지" />
+                            <h2>
+                                {{item.MODEL_NAME}}
+                            </h2>
+                            <span class="red">
+                                {{item.PRICE}}
+                            </span>
+                        </a>
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h1>Footer</h1>
+
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>
+
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                sessionName: "",
+                list: []
+            };
+        },
+        methods: {
+            // 함수(메소드) - (key : function())
+           
+
+            fnGetProduct: function () {
+                const self = this;
+                $.ajax({
+                    url: "http://192.168.30.57:3000/product",
+                    dataType: "json",
+                    type: "GET", // 원래대로라면 post
+                    data: {},
+                    success: function (data) {
+                        console.log(data);
+                        self.list = data.list;
+                    }
+                });
+            },
+
+            fnLogout: function () {
+                if (!confirm("로그아웃 하시겠습니까?")) {
+                    return;
+                }
+
+                // console.log("삭제 전 ======> ", localStorage.getItem("sessionId"));
+                localStorage.clear();
+                // console.log("삭제 후 ======> ", localStorage.getItem("sessionId"));
+                location.href = "login.html";
+            },
+
+            fnView: function(productId){
+                location.href = `product-info.html?productId=${productId}`;
+            }
+        }, // methods
+        mounted() {
+            // 처음 시작할 때 실행되는 부분
+            const self = this;
+            //console.log(localStorage.getItem("sessionId"));
+            if (localStorage.getItem("sessionId") == null) {
+                // alert("로그인 후 이용해주세요");
+                location.href = "login.html";
+                return;
+            }
+
+            self.sessionName = localStorage.getItem("sessionName");
+
+            self.fnGetProduct();
+
+        }
+    });
+
+    app.mount('#app');
+</script>

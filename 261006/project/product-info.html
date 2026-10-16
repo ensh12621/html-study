@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+
+    <style>
+        ul,
+        ol {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: azure;
+        }
+
+        .section1 {
+            width: 700px;
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 10px 30px;
+        }
+
+        .section1 h1 {
+            border-bottom: 2px solid #aaa;
+        }
+
+        .section1_1 {
+            display: flex;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+
+        .section1_1 .left img {
+            width: 300px;
+            object-fit: contain;
+            height: 400px;
+        }
+
+        .section1_1 .left ul {
+            display: flex;
+            gap: 5px;
+        }
+
+        .section1_1 .left ul li {
+            border: 1px solid #eee;
+            border-radius: 5px;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+
+        .section1_1 .left ul li img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+        }
+
+        .section1_1 .right {
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .section1_1 .right ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section1_1 .right li:nth-child(1) {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .section1_1 .right li:nth-child(2) {
+            color: #ff0000;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .section1_1 .right li:nth-child(3) {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .section1_1 .right li:nth-child(3) .mini-red {
+            display: block;
+            color: red;
+            font-size: 12px;
+        }
+
+        .section1_1 .right li:nth-child(4) {
+            color: blue;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .section1_1 .right li:nth-child(5),
+        .section1_1 .right li:nth-child(6) {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .section1_1 .right button {
+            background-color: rgb(115, 115, 219);
+            color: #fff;
+            border: 0 none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 45px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <!-- html. 반드시 id가 app인 태그 안에서 작업 -->
+        <!-- (script 맨 하단 app.mount('#app'); 여기 아이디와 같아야 함) -->
+        <div class="section1">
+            <h1>
+                {{info.PRODUCT_NAME}}
+            </h1>
+
+            <div class="section1_1">
+                <div class="left">
+                    <img :src="info.PATH" alt="상품이미지" />
+                    <ul>
+                        <li v-for="item in imgList">
+                            <img :src="item.PATH" :alt="item.IMGNAME">
+
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="right">
+                    <ul>
+                        <li>
+                            상품명: {{info.PRODUCT_NAME}}
+                        </li>
+                        <li>
+                            판매가: {{ new Intl.NumberFormat().format(info.PRICE)}}
+                        </li>
+                        <li>
+                            배송비: 30,000원
+                            <span class="mini-red">
+                                10,000,000원 이상 주문 시 무료
+                            </span>
+                        </li>
+                        <li>
+                            적립금: {{ new Intl.NumberFormat().format(Math.round(info.PRICE * 0.01))  }}원(1%)
+                        </li>
+                        <li>
+                            브랜드: {{info.BRAND}}
+                        </li>
+                        <li>
+                            설명: {{info.DESCRIPTION}}
+                        </li>
+                        <li>
+                            <button>구매하기</button>
+                        </li>
+                    </ul>
+
+                </div><!-- right -->
+
+            </div><!-- seciton1_1 -->
+
+
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                // 변수 - (key : value)
+                productId: "",
+                info: {},
+                imgList: []
+            };
+        },
+        methods: {
+            // 함수(메소드) - (key : function())
+            fnGetProduct: function () {
+                const self = this;
+                const queryParams = new URLSearchParams(window.location.search);
+                self.productId = queryParams.get('productId') || '';
+                console.log("번호: " + self.productId);
+                if (self.productId == '') {
+                    alert("해당 상품 없다!!");
+                    location.href = "product-home.html";
+                }
+
+
+                $.ajax({
+                    url: "  http://192.168.30.57:3000/product/info",
+                    dataType: "json",
+                    type: "GET",
+                    data: {
+                        productId: self.productId
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        self.info = data.info;
+                        self.imgList = data.imgList;
+                    }
+                });
+            },
+
+            slideImage: function(){
+                const self = this;
+
+                let i = 0;
+                setInterval(() => {
+
+                    self.info.PATH = self.imgList[i].PATH;
+
+                    i++;
+                    if(i == self.imgList.length){
+                        i = 0;
+                    }
+                }, 2000);
+            }
+
+        }, // methods
+        mounted() {
+            // 처음 시작할 때 실행되는 부분
+            const self = this;
+            self.fnGetProduct();
+            self.slideImage();
+        }
+    });
+
+    app.mount('#app');
+</script>
