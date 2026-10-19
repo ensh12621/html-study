@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@8.3.1/dist/apexcharts.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- html. 반드시 id가 app인 태그 안에서 작업 -->
+        <!-- (script 맨 하단 app.mount('#app'); 여기 아이디와 같아야 함) -->
+
+        <div id="chart"></div>
+
+    </div>
+</body>
+
+</html>
+
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                // 변수 - (key : value)
+                chart: null
+            };
+        },
+        methods: {
+            // 함수(메소드) - (key : function())
+            fnChart: function () {
+                const self = this;
+
+
+
+
+
+
+
+                $.ajax({
+                    url: "http://192.168.30.57:3000/student",
+                    dataType: "json",
+                    type: "GET",
+                    data: {
+                        keyword: self.keyword,
+                        grade: self.grade
+                    },
+                    success: function (data) {
+                        self.list = data.list;
+                        self.renderDataWithChart(data.list);
+                        console.log(data.list);
+                    }
+                });
+
+
+            },
+            renderDataWithChart: function (list) {
+
+                var options = {
+                    series: [
+                        {
+                            name: 'Inflation',
+                            data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2],
+                        },
+                    ],
+                    chart: {
+                        height: 350,
+                        type: 'bar',
+                    },
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 10,
+                            dataLabels: {
+                                position: 'top', // top, center, bottom
+                            },
+                        },
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            // return val + '%'
+                            return val;
+                        },
+                        offsetY: -20,
+                        style: {
+                            fontSize: '12px',
+                            colors: ['#304758'],
+                        },
+                    },
+
+                    xaxis: {
+                        categories: [
+                            'Jan',
+                            'Feb',
+                            'Mar',
+                            'Apr',
+                            'May',
+                            'Jun',
+                            'Jul',
+                            'Aug',
+                            'Sep',
+                            'Oct',
+                            'Nov',
+                            'Dec',
+                        ],
+                        position: 'top',
+                        axisBorder: {
+                            show: false,
+                        },
+                        axisTicks: {
+                            show: false,
+                        },
+                        crosshairs: {
+                            fill: {
+                                type: 'gradient',
+                                gradient: {
+                                    colorFrom: '#D8E3F0',
+                                    colorTo: '#BED1E6',
+                                    stops: [0, 100],
+                                    opacityFrom: 0.4,
+                                    opacityTo: 0.5,
+                                },
+                            },
+                        },
+                        tooltip: {
+                            enabled: true,
+                        },
+                    },
+                    yaxis: {
+                        axisBorder: {
+                            show: false,
+                        },
+                        axisTicks: {
+                            show: false,
+                        },
+                        labels: {
+                            show: false,
+                            formatter: function (val) {
+                                return val + '%'
+                            },
+                        },
+                    },
+                    title: {
+                        text: '학생들의 키',
+                        floating: true,
+                        offsetY: 330,
+                        align: 'center',
+                        style: {
+                            color: '#444',
+                        },
+                    },
+                }
+
+                options.xaxis.categories = [];
+                options.series[0].data = [];
+
+                list.forEach(item => {
+                    options.xaxis.categories.push(item.STU_NAME);
+                    options.series[0].data.push(item.STU_HEIGHT);
+                });
+
+
+                var chart = new ApexCharts(document.querySelector('#chart'), options)
+                chart.render()
+            }
+        }, // methods
+        mounted() {
+            // 처음 시작할 때 실행되는 부분
+            const self = this;
+
+
+            self.fnChart();
+
+        }
+    });
+
+    app.mount('#app');
+</script>
