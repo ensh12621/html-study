@@ -34,6 +34,7 @@
 
         <div>
             <button @click="fnLogin">로그인</button>
+            <button @click="fnJoinForm">회원가입</button>
         </div>
 
     </div>
@@ -73,6 +74,9 @@
                         }
                     }
                 });
+            },
+            fnJoinForm: function(){
+                location.href = "join.html";
             }
         }, // methods
         mounted() {
